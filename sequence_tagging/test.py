@@ -1,5 +1,5 @@
 from utils import load_model, extend_maps, prepocess_data_for_lstmcrf
-from data import build_corpus
+from data import load_data 
 from evaluating import Metrics
 from evaluate import ensemble_evaluate
 
@@ -14,9 +14,9 @@ REMOVE_O = False  # 在评估的时候是否去除O标记
 def main():
     print("读取数据...")
     train_word_lists, train_tag_lists, word2id, tag2id = \
-        build_corpus("train")
-    dev_word_lists, dev_tag_lists = build_corpus("dev", make_vocab=False)
-    test_word_lists, test_tag_lists = build_corpus("test", make_vocab=False)
+        load_data("train")
+    dev_word_lists, dev_tag_lists = load_data("dev", make_vocab=False)
+    test_word_lists, test_tag_lists = load_data("test", make_vocab=False)
 
     print("加载并评估hmm模型...")
     hmm_model = load_model(HMM_MODEL_PATH)
